@@ -186,5 +186,5 @@ bigger searching areas.
 - Adaptability: Adapting the scraper to handle different website layouts improved its reliability and robustness.
 - Error Handling: Enhancing error handling and logging mechanisms allowed for better troubleshooting and debugging during development.
 
-##Some websites have countermeasures and still block automated access from bots. The limitation of
-the bot is not able to access those websites.
+**Some websites have countermeasures and still block automated access from bots. The limitation of
+the bot is not able to access those websites.**
