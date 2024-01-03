@@ -1,0 +1,11 @@
+{
+    "name": "project-ideas-scraper",
+    "version": "1.0.0",
+    "description": "Web scraper for software engineering project ideas",
+    "main": "scraper.js",
+    "dependencies": {
+        "axios": "^0.24.0",
+        "cheerio": "^1.0.0-rc.10",
+        "dotenv": "^16.3.1"
+    }
+}
