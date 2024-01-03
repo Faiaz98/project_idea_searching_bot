@@ -63,7 +63,7 @@ const getSearchResults = async (query) => {
 };
 
 ```
-- Functionality:
+ **Functionality:**
 - Constructs the search query URL using the provided API key and Custom Search Engine ID (CSE ID).
 - Performs an HTTP GET request to the GOogle Custom Search API endpoint.
 - Retrieves search results and extracts the links from the response data.
@@ -92,7 +92,7 @@ const scrapeProjectIdeas = async (url) => {
 };
 
 ```
-- Functionality:
+**Functionality:**
 - Performs an HTTP GET request to the specified URL.
 - Loads the HTML content using Cheerio to manipulate and traverse the DOM.
 - Extracts project ideas by targeting specific HTML elements (e.g., <div class="project-idea">) and retrieving their text content.
@@ -108,7 +108,7 @@ const randomDelay = async (min, max) => {
 };
 
 ```
-- Functionality:
+**Functionality:**
 - Generates a random delay duration between min and max values.
 - Pauses the execution of code for the generated duration using setTimeout.
 
@@ -116,3 +116,75 @@ const randomDelay = async (min, max) => {
 ## Workflow
 
 ### Project Functionality
+
+**Project Functionality**
+- getSearchResults: Fetches search results from Google based on predefined keywords.
+- scrapeProjectIdeas: Extracts project ideas from the fetched web pages.
+- Random Delays: Implements delays between requests to avoid rate limiting.
+
+## Flow Diagram
+```
+                                                                                                
+                       +---------------+   Random Keyword   +---------------+                   
+                       |  getSearch    | ------------------> |  scrapeProject |                   
+                       |  Results      |                     |    Ideas      |                   
+                       +---------------+                     +---------------+                   
+                              |                                     |                              
+                              v                                     |                              
+                +------------------------+                           |                              
+                | Search for keywords,  |                           |                              
+                | fetch Google results, |                           |                              
+                | and extract links     |                           |                              
+                +------------------------+                           |                              
+                              |                                     |                              
+                              v                                     |                              
+                       +----------------------+                      |                              
+                       | Retrieve web content |                      |                              
+                       | and extract project  |                      |                              
+                       | ideas from websites  |                      |                              
+                       +----------------------+                      |                              
+                              |                                     |                              
+                              v                                     |                              
+                       +----------------------+                      |                              
+                       | Display found ideas  |                      |                              
+                       +----------------------+                      |                              
+                              |                                     |                              
+                              v                                     |                              
+                                                                     
+
+```
+
+## Contributions
+Feel free to contribute by opening issues or creating pull requests. Contributions that enhance functionality, add new features, or improve documentation are welcome!
+
+## Project Details
+
+**Objective**
+
+The objective of this web scraper project is to gather project ideas related to software development, machine learning, web applications, and mobile apps from various websites. It aims to automate the process of searching for project ideas by querying search engines, navigating to relevant web pages, and extracting project-related content.
+
+**Technical Aspects**
+
+The project utilizes Node.js along with Axios for handling HTTP requests and Cheerio for HTML parsing. It interacts with the Google Custom Search API to obtain search results and extracts project ideas by scraping content from fetched web pages. The scraper incorporates random delays between requests to prevent rate limiting and mimic human browsing behavior.
+
+**Challenges Faced**
+
+- Searching Limitation: Dealing with the bot going for random unnecessary websites and generating
+  garbage values.
+  
+- Rate Limiting: Dealing with rate limiting from search engines and websites was a significant challenge. Introducing random delays helped mitigate this issue.
+
+- HTML Structure Variability: Websites have different HTML structures, making it challenging to consistently extract project ideas. Customizing the scraping logic for each website was necessary.
+
+- Handling Errors: Managing various types of errors, such as HTTP request failures or incorrect HTML structures, required robust error handling mechanisms.
+
+**Fixed Issues**
+
+- Searching limitation Avoidance: Implementing Google Custom Search Engine provided better and
+bigger searching areas.
+- Rate Limiting Avoidance: Implementing random delays between requests significantly helped in avoiding rate limiting while scraping.
+- Adaptability: Adapting the scraper to handle different website layouts improved its reliability and robustness.
+- Error Handling: Enhancing error handling and logging mechanisms allowed for better troubleshooting and debugging during development.
+
+##Some websites have countermeasures and still block automated access from bots. The limitation of
+the bot is not able to access those websites.
