@@ -19,7 +19,7 @@ const getSearchResults = async(query) => {
     try {
         const response = await axios.get(searchUrl, { headers });
         const searchResults = response.data.items.map(item => item.link);
-        await delay(3000);
+        await randomDelay(3000);
         return searchResults;
         // const $ = cheerio.load(response.data);
 
@@ -63,17 +63,18 @@ const scrapeProjectIdeas = async(url) => {
         $('div.project-idea').each((index, element) => {
             projectIdeas.push($(element).text().trim()); // Store project idea in the array
         });
-        await delay(3000);
+        await randomDelay(3000);
         return projectIdeas;
     } catch (error) {
         console.error("Failed to fetch the webpage:", error.message);
+        return [];
     }
 };
 
 //function to introduce a random delay between requests
-const randomDelay = (min, max) => {
+const randomDelay = async(min, max) => {
     const delayDuration = Math.floor(Math.random() * (max - min + 1)) + min;
-    return new Promise((resolve) => setTimeout(resolve, delayDuration));
+    await new Promise((resolve) => setTimeout(resolve, delayDuration));
 };
 
 //function to perform the search and scrape process for a specific duration
