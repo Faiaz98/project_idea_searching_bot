@@ -42,3 +42,77 @@ node scraper.js
 ## How it Works
 The `scraper.js` file functions as follows:
    
+### Fetching Search Results
+The `getSearchResults` function uses Axios to make HTTP requests to Google's Custom Search API, retrieving links based on predefined keywords.
+```
+The `getSearchResults` function is responsible for querying Google's Custom Search API to fetch search results based on predefined keywords. This function uses the Axios library to make an HTTP GET request to the API endpoint constructed with the specified query parameters.
+
+const getSearchResults = async (query) => {
+    const apiKey = process.env.API_KEY;
+    const cx = process.env.CSE_ID;
+    const searchUrl = `https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=${apiKey}&cx=${cx}`;
+
+    try {
+        const response = await axios.get(searchUrl);
+        const searchResults = response.data.items.map(item => item.link);
+        return searchResults;
+    } catch (error) {
+        console.error("Failed to fetch search results: ", error.message);
+        return [];
+    }
+};
+
+```
+- Functionality:
+- Constructs the search query URL using the provided API key and Custom Search Engine ID (CSE ID).
+- Performs an HTTP GET request to the GOogle Custom Search API endpoint.
+- Retrieves search results and extracts the links from the response data.
+
+### Scraping Project Ideas
+The `scraperProjectIdeas` function utilizes Cheerio for HTML parsing and extracts project ideas from specific websites' content.
+```
+The `scrapeProjectIdeas` function scrapes project ideas from the content of fetched web pages. It utilizes Axios to make an HTTP GET request to the specified URL and Cheerio for parsing HTML content and extracting project ideas.
+
+const scrapeProjectIdeas = async (url) => {
+    try {
+        const response = await axios.get(url);
+        const $ = cheerio.load(response.data);
+
+        const projectIdeas = [];
+        
+        // Extracts project ideas based on the website's HTML structure
+        $('div.project-idea').each((index, element) => {
+            projectIdeas.push($(element).text().trim());
+        });
+
+        return projectIdeas;
+    } catch (error) {
+        console.error("Failed to fetch the webpage:", error.message);
+    }
+};
+
+```
+- Functionality:
+- Performs an HTTP GET request to the specified URL.
+- Loads the HTML content using Cheerio to manipulate and traverse the DOM.
+- Extracts project ideas by targeting specific HTML elements (e.g., <div class="project-idea">) and retrieving their text content.
+
+### Random Delays
+The code implements delays between requests to avoid rate limiting and simulate human-like browsing behavior.
+```
+The `randomDelay` function introduces random delays between requests to prevent rate limiting. It helps mimic human-like browsing behavior by pausing execution for a random duration within a specified range.
+
+const randomDelay = async (min, max) => {
+    const delayDuration = Math.floor(Math.random() * (max - min + 1)) + min;
+    await new Promise((resolve) => setTimeout(resolve, delayDuration));
+};
+
+```
+- Functionality:
+- Generates a random delay duration between min and max values.
+- Pauses the execution of code for the generated duration using setTimeout.
+
+
+## Workflow
+
+### Project Functionality
